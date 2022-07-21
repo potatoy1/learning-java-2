@@ -48,7 +48,7 @@ public class T04ListSortTest {
 
 /*
  *  정렬 기준의 외부 선언을 위해서는 Comparator인터페이스를 구현하면 된다.
- *  Member의 번호(num)의 내림차순으로 정렬하기
+ *  Member의 번호(num)의 내림차순으로 정렬하기 
  */
 class SortNumDesc implements Comparator<Member>{
 
