@@ -23,7 +23,7 @@ public class T05HashSetTest {
 		System.out.println("Set 데이터: " + hs1);		
 		System.out.println();
 		
-		// Set은 데이터의 순서가 업속, 중복을 허용하지 않는다.
+		// Set은 데이터의 순서가 없고, 중복을 허용하지 않는다.
 		// 그래서 이미 있는 데이터를 add하면 false를 반환하고, 데이터는 추가되지 않는다.
 		boolean isAdded = hs1.add("FF");
 		System.out.println("중복되지 않을 때 : " + isAdded);
@@ -64,7 +64,7 @@ public class T05HashSetTest {
 		// 데이터 개수만큼 반복하기
 		// hasNext() => 포인터 다음 위치에 데이터가 있으면 true, 없으면 false를 반환한다.
 		while(it.hasNext()) { // 다음 자료가 있는지 검사
-			// next() => 포인터를 다음 자료 위치로 이동하고 이동한 위치의 자료를 반환한다.
+			// next() => 포인터를 다음 자료 위치로 이동하고 이동한 위치의 자료를 반환한다. 			Iterator가 가지고 있는 메소드 hasNext()/next()
 			System.out.println(it.next());
 		}
 		

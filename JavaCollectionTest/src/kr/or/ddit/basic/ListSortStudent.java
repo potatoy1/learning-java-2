@@ -27,6 +27,7 @@ public class ListSortStudent{
 		for(Student student : studentList) {
 			System.out.println(student);
 		}
+		
 	}
 	
 }
@@ -131,6 +132,5 @@ class Student implements Comparable<Student>{
 	public int compareTo(Student student) {
 		return this.getStudentNum().compareTo(student.getStudentNum());
 	}
-	
 	
 }

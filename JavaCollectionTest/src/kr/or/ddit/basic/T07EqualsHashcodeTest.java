@@ -1,5 +1,9 @@
 package kr.or.ddit.basic;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 public class T07EqualsHashcodeTest {
 /*
   해시함수(hash function)는 임의의 길이의 데이터를 고정된 길이의 데이터로 매핑하는 함수이다.
@@ -20,8 +24,105 @@ public class T07EqualsHashcodeTest {
   그러므로, 클래스에서 hashCode()메서드를 override하지 않으면 절대로 두 객체가 같은 것으로 간주될 수 없다.
  */
 	public static void main(String[] args) {
-		String str = "홍길동";
-		System.out.println(str.hashCode()); 	// 같은 값이면 같은 해시코드 계속 출력.
-		System.out.println(str.contentEquals(str));
+		Person p1  = new Person(1, "홍길동");
+		Person p2  = new Person(1, "홍길동");
+		Person p3  = new Person(1, "이순신");
+		
+		
+//		System.out.println("Aa".hashCode());
+//		System.out.println("BB".hashCode());
+		
+		//해시코드가 같다고 같은것은 아닐 수 있음.
+		//equals를 오버라이딩하지 않아서 object의 equals로 비교하게되는데 object의 equals는 주소가 다르므로 다르다고 판다.
+		
+		System.out.println("p1.equals(p2): " + p1.equals(p2));
+		System.out.println("p1 == p2 : " + (p1 == p2));
+		
+		Set<Person> set = new HashSet<Person>();
+		
+		set.add(p1);
+		set.add(p2);
+		System.out.println("p1,p2등록 후 데이터: " );
+		
+//		Iterator<Person> iter = set.iterator();
+//		while(iter.hasNext()) {
+//			Person p = iter.next();
+//			System.out.println(p.getId() + " : " + p.getName());
+//		}
+		for(Person p : set) {
+			System.out.println(p.getId() + " : " + p.getName());
+		}
+		System.out.println("add(p3) 성공여부 : " + set.add(p3));
+		System.out.println("add(p3) 후 데이터: ");
+		for(Person p : set) {
+			System.out.println(p.getId() + " : " + p.getName());
+		}
+		System.out.println("remove(p2) 성공여부: " + set.remove(p2));
+		System.out.println("remove(p2) 후 데이터: ");
+		for(Person p : set) {
+			System.out.println(p.getId() + " : " + p.getName());
+		}
 	}
+}
+
+class Person {
+	
+	private int id;
+	private String name;
+	public Person(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
+//	@Override
+//	public String toString() {
+//		return "Person [id=" + id + ", name=" + name + "]";
+//	}
+//	@Override
+//	public int hashCode() {
+//		return (name + id).hashCode();
+//	}
+//	public boolean equals(Object obj) {
+//		Person p = (Person) obj;
+//		return this.getId() == p.getId() && this.getName().equals(p.getName());
+//	}
 }

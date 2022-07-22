@@ -69,7 +69,7 @@ public class T01ArrayListTest {
 		System.out.println("ZZZ의 index값 : " + list2.indexOf("ZZZ"));
 		System.out.println("--------------------------------------------");
 		
-		// toArray() => 리스트 안의 데이트들을 배열로 변환하여 반환한다.
+		// toArray() => 리스트 안의 데이터들을 배열로 변환하여 반환한다.
 		//			    기본적으로 Object형 배열로 반환한다.
 		Object[] strArr = list2.toArray();
 		System.out.println("배열의 개수 : " + strArr.length);
