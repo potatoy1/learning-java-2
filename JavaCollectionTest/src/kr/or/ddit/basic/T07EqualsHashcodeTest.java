@@ -33,7 +33,9 @@ public class T07EqualsHashcodeTest {
 //		System.out.println("BB".hashCode());
 		
 		//해시코드가 같다고 같은것은 아닐 수 있음.
-		//equals를 오버라이딩하지 않아서 object의 equals로 비교하게되는데 object의 equals는 주소가 다르므로 다르다고 판다.
+		//equals를 오버라이딩하지 않아서 object의 equals로 비교하게되는데 object의 equals는 주소가 다르므로 다르다고 판단.
+		//equals로 오버라이딩 해서 1과 1이 같고 홍길동과 홍길동이 같아서 true로 나옴.
+		//==으로 비교한 것은 p1객체와 p2객체가 다르다는것.
 		
 		System.out.println("p1.equals(p2): " + p1.equals(p2));
 		System.out.println("p1 == p2 : " + (p1 == p2));
