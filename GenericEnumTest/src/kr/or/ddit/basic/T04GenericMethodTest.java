@@ -8,8 +8,8 @@ class Util {
 	 
 	 선언방법 : 리턴타입 앞에 <> 기호를 추가하고 타입글자를 기술 후 사용함.
 */
-	public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2){
-		boolean keyCompare = p1.getKey().equals(p2.getKey());
+	public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2){			// 제너릭이므로 k,v에 모든 타입이 올 수 있음. 
+		boolean keyCompare = p1.getKey().equals(p2.getKey());					// 타입에 제한 걸기-> 제한된 타입 파라미터
 		boolean valueCompare = p1.getValue().equals(p2.getValue());
 		
 		return keyCompare && valueCompare;

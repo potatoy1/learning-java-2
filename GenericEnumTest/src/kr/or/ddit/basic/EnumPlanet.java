@@ -23,7 +23,7 @@ public class EnumPlanet {
 	public static void main(String[] args) {
 		Planet[] enumArr = Planet.values();
 		for(int i = 0; i<enumArr.length; i++) {
-			System.out.println(enumArr[i].name() + "의 겉넓이:" + 4 * Math.PI * enumArr[i].getI()*enumArr[i].getI());
+			System.out.println(enumArr[i].name() + "의 면적:" + 4 * Math.PI * enumArr[i].getI()*enumArr[i].getI());
 		}
 	}
 }

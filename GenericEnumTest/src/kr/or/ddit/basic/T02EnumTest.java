@@ -44,7 +44,7 @@ public class T02EnumTest {
 		  	열거형에서 사용되는 메서드
 		  	
 		  	1. name() => 열거형 상수의 이름 문자열로 반환한다.
-		  	2. ordinal() => 열거형 상수가 정의된 문서값을 반환한다.(기본적으로 0부터 시작.)
+		  	2. ordinal() => 열거형 상수가 정의된 문서값을 반환한다.(기본적으로 0부터 시작.오름차순이 기본- compareTo사용가능) 
 		  	3. valueOf("열거형상수이름") => 지정된 열거형에서 '열거형상수이름'과 일치하는 열거형 상수를 반환한다.
 		 */
 		City myCity1; // 열거형 객체변수 선언
@@ -72,7 +72,7 @@ public class T02EnumTest {
 		for(int i = 0; i<enumArr.length; i++) {
 			System.out.println(enumArr[i].name() + ":"+ enumArr[i].getStr());
 		}
-		for(City city : City.values()) {			//리턴값이 배열이므로 향상된for문 사용가능.( iterable도 향상된for문 가능)
+		for(City city : City.values()) {			//리턴값이 배열이므로 향상된for문 사용가능.( Iterable도 향상된for문 가능)
 			System.out.println(city + ":" + city.ordinal());	//city = city.toString() = city.name()
 		}
 		
