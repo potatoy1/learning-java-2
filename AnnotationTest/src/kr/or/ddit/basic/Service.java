@@ -6,7 +6,7 @@ public class Service {
 	public void method1() {
 		System.out.println("메서드1에서 출력되었습니다.");
 	}
-	@PrintAnnotation(value = "%")
+	@PrintAnnotation("%")	// value값만 지정해 줄 경우 value= 생략가능.
 	public void method2() {
 		System.out.println("메서드2에서 출력되었습니다.");
 	}

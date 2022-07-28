@@ -22,7 +22,7 @@ public class SampleVO implements Serializable, Comparable<String>{
 		this.name = name;
 		this.age = age;
 	}
-	
+	@Deprecated
 	public String getId() {
 		return id;
 	}
