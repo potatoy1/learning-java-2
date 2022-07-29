@@ -59,6 +59,7 @@ class StatePrintThread extends Thread{
 			
 			// 종료 상태인지 검사하여 무한루프 빠져나가기
 			if(state == Thread.State.TERMINATED) {
+//				targetThread.start();		// Terminated 상태일때는 start()할 수 없고 new로 새로 생성해야 다시 실행가능하다.
 				break;
 			}
 			
