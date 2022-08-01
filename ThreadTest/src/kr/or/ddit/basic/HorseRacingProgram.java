@@ -3,35 +3,38 @@ package kr.or.ddit.basic;
 import java.util.ArrayList;
 import java.util.List;
 
-//static String strRank = "";
-
 public class HorseRacingProgram {
+	static String strRank = "";
+	
 	public static void main(String[] args) {
 		Horse[] horses = new Horse[] {
 			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
-			new Horse("1번말"),
+			new Horse("2번말"),
+			new Horse("3번말"),
+			new Horse("4번말"),
+			new Horse("5번말"),
+			new Horse("6번말"),
+			new Horse("7번말"),
+			new Horse("8번말"),
+			new Horse("9번말"),
+			new Horse("10번말")
+		};
+	
+		for(Horse h : horses) {
+			h.start();
 		}
-//		List<String> list = new ArrayList<String>();
-//		list.add("1번말");
-//		list.add("2번말");
-//		list.add("3번말");
-//		list.add("4번말");
-//		list.add("5번말");
-//		list.add("6번말");
-//		list.add("7번말");
-//		list.add("8번말");
-//		list.add("9번말");
-//		list.add("10번말");
-//		System.out.println(list);
+		for(Horse h : horses) {
+			try {
+				h.join();
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("경기 끝");
+		System.out.println("---------------------");
+		System.out.println();
+		System.out.println("경기 결과");
+		System.out.println("순위 : " + strRank);
 	}
 }
 
@@ -54,21 +57,24 @@ class Horse extends Thread implements Comparable<Horse>{
 
 	@Override
 	public void run() {
-		for(char ch ='A'; ch<='Z';ch++) {
-			System.out.println(name + "의 출력문자: " + ch);
-			
+//		for(int i=1; i<=5; i++) {
+		
+//			System.out.println("-");
+//		System.out.print(">");
+		{
 			try {
-				Thread.sleep((int)(Math.random() + 301 + 200));
+				Thread.sleep((int)(Math.random() +100));
 			}catch(InterruptedException ex) {
 				ex.printStackTrace();
 			}
 		}
-		System.out.println(name + "출력 끝...");
-		T11DisplayCharacterTest.strRank += name + " ";
+		System.out.println(name + "");
+		HorseRacingProgram.strRank += name + " ";
 	}
-
+	
 	@Override
-	public int compareTo(int h) {
-		return this.getRank().compareTo(h.getRank());
+	public int compareTo(Horse o) {
+		return Integer.compare(rank,o.getRank());
 	}
 }
+
