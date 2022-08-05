@@ -18,6 +18,9 @@ public class T09FileEncodingTest {
  	
  	ANSI는 영어를 표기하기 위해 만든 코드로 규격 자체에 한글이 없었다가 나중에 여기에 
  	EUC-KR, CP949라는 식으로 한글이 포함된 방식이 생겨났음.
+ 	
+ 	String이 바이트기반스트림으로 1바이트씩 읽어들여서 2바이트씩 읽어야 데이터가 온전히 복원되므로 보조스트림사용해서 2바이트씩 읽음.
+ 	데이터타입에 맞춰 보조스트림으로 읽어들이는 크기에 맞게 읽어들임.
  */
 	public static void main(String[] args) {
 		

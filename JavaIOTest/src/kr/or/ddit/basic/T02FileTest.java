@@ -32,6 +32,7 @@ public class T02FileTest {
 		}else {
 			System.out.println(f2.getAbsolutePath() + "은 없는 파일 입니다.");
 		}
+	
 		System.out.println("-------------------------------------------------");
 		
 		File f3 = new File("d:/D_Other");
