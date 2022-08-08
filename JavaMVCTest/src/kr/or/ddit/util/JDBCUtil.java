@@ -1,41 +1,20 @@
 package kr.or.ddit.util;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 
-/**
- * db.properties파일의 내용으로 DB정보를 설정하는 방법 (유지보수가 좋아짐)
- * 방법1) Properties 객체 이용하기 
- *
- */
-
-public class JDBCUtil2 {
-	
-	static Properties prop; // Properties 객체변수 선언
-	
-	static {	
-		
-		prop = new Properties();
-		
-		
+public class JDBCUtil {
+	static {	//JDBCUtil 클래스가 vm에 클래스정보를 로딩하는데 그 시점에 static블럭이 한번만 실행된다.
 		try {
-			prop.load(new FileInputStream("res/db.properties"));
-			
-			Class.forName(prop.getProperty("driver"));
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("드라이버 로딩 완료!!");
 			
 		}catch(ClassNotFoundException ex) {
 			System.out.println("드라이버 로딩 실패!!!");
-		}catch(IOException ex) {
-			System.out.println("해당 파일이 없거나 입출력 오류입니다.");
-			ex.printStackTrace();
 		}
 	}
 	
@@ -45,7 +24,7 @@ public class JDBCUtil2 {
 	 */
 	public static Connection getConnection() { //정상적일경우 connection을 리턴, 예외일경우  null을 리턴
 		try {
-			return DriverManager.getConnection(prop.getProperty("url"),prop.getProperty("username"),prop.getProperty("password"));
+			return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "pc13", "java");
 		}catch(SQLException ex){
 			System.out.println("DB 연결실패!!!");
 			ex.printStackTrace();
@@ -60,11 +39,3 @@ public class JDBCUtil2 {
 		if(conn != null) try {conn.close();}catch(SQLException ex) {}
 		}
 	}
-//
-//사용자가 뷰를 통해 요청함
-//
-//사용자가 요청한 원하는 기능을 서비스한테 처리해주는 컨트롤러
-//
-//처리 후 다시 뷰를 통해 사용자에게 보여짐
-//
-//모델->데이터 관련된 것

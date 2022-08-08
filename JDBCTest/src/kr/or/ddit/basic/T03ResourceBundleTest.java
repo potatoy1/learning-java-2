@@ -1,6 +1,7 @@
 package kr.or.ddit.basic;
 
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class T03ResourceBundleTest {
@@ -19,7 +20,10 @@ public class T03ResourceBundleTest {
 		   => 파일을 지정할 때는 '파일명'만 지정하고 확장자는 지정하지 않는다.
 		   (확장자는 항상 properties이기 때문에...)
 		 */
-		ResourceBundle bundle = ResourceBundle.getBundle("db"); 	//해당 /(루트)부터 찾는다.
+		
+		// 기본로케일 설정값 출력하기
+		System.out.println("기본로케일 정보 => " + Locale.getDefault()); 
+		ResourceBundle bundle = ResourceBundle.getBundle("db", Locale.JAPANESE); 	//해당 /(루트)부터 찾는다.
 		
 		// key 값들만 읽어오기
 		Enumeration<String> keys = bundle.getKeys();
