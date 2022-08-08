@@ -35,7 +35,7 @@ public class T02PropertiesTest {
 			
 			while(keys.hasMoreElements()) {
 				String key = keys.nextElement();
-				String value = prop.getProperty(key);
+				String value = prop.getProperty(key);		//속성이름과 값을 다 꺼내온다.
 				System.out.println(key + "=> " + value);
 			}
 			System.out.println("출력 끝...");

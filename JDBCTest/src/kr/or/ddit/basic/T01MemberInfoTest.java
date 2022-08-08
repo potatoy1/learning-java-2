@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import kr.or.ddit.util.JDBCUtil;
+import kr.or.ddit.util.JDBCUtil3;
 
 /*
 	회원정보를 관리하는 프로그램을 작성하는데 
@@ -103,13 +103,13 @@ public class T01MemberInfoTest {
 		System.out.println("---------------------------------------------------------------");
 		
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCUtil3.getConnection();
 			
 			String sql = "select * from mymember";
 			
 			stmt = conn.createStatement();
 			
-			rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql);		// executeQuery는 결과값이 int값이 아니고, executeUpdate는 결과값이 int값이다.
 			
 			while(rs.next()) {
 				String memId = rs.getString("mem_id");
@@ -124,7 +124,7 @@ public class T01MemberInfoTest {
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}finally {
-			JDBCUtil.close(conn, stmt, pstmt, rs);
+			JDBCUtil3.close(conn, stmt, pstmt, rs);
 		}
 	}
 
@@ -138,7 +138,7 @@ public class T01MemberInfoTest {
 		
 		String memId = scan.next();
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCUtil3.getConnection();
 			
 			String sql = "delete from mymember where mem_id =? ";
 			
@@ -155,7 +155,7 @@ public class T01MemberInfoTest {
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}finally {
-			JDBCUtil.close(conn, stmt, pstmt, rs);
+			JDBCUtil3.close(conn, stmt, pstmt, rs);
 		}
 	}
 
@@ -194,7 +194,7 @@ public class T01MemberInfoTest {
 		String memAddr = scan.nextLine();
 		
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCUtil3.getConnection();
 			
 			String sql ="UPDATE mymember " 
 					+ " SET  mem_name = ?" 
@@ -217,7 +217,7 @@ public class T01MemberInfoTest {
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}finally {
-			JDBCUtil.close(conn, stmt, pstmt, rs);
+			JDBCUtil3.close(conn, stmt, pstmt, rs);
 		}
 	}
 
@@ -257,7 +257,7 @@ public class T01MemberInfoTest {
 		String memAddr = scan.nextLine();
 		
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCUtil3.getConnection();
 			
 			String sql = "INSERT INTO mymember ( mem_id, mem_name, mem_tel, mem_addr, reg_dt)" + "VALUES(?, ?, ?, ?, sysdate)";
 					
@@ -278,7 +278,7 @@ public class T01MemberInfoTest {
 			ex.printStackTrace();
 		}finally {
 			// 자원반납
-			JDBCUtil.close(conn, stmt, pstmt, rs);
+			JDBCUtil3.close(conn, stmt, pstmt, rs);
 		}
 		
 	}
@@ -291,7 +291,7 @@ public class T01MemberInfoTest {
 		boolean chk = false;
 		
 		try {
-			conn = JDBCUtil.getConnection();
+			conn = JDBCUtil3.getConnection();
 			
 			String sql = "select count(*) as cnt from mymember " + " where mem_id = ? ";
 			
@@ -310,7 +310,7 @@ public class T01MemberInfoTest {
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}finally {
-			JDBCUtil.close(conn, stmt, pstmt, rs);
+			JDBCUtil3.close(conn, stmt, pstmt, rs);
 		}
 		return chk;
 	}

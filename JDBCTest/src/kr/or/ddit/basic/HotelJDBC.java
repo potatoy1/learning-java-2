@@ -139,7 +139,7 @@ public class HotelJDBC {
 		try {
 			conn = JDBCUtil.getConnection();
 			
-			String sql = "INSERT INTO HOTEL_MNG ( room_num, guest_name)" + "VALUES(?, ?)";
+			String sql = "INSERT INTO HOTEL_MNG (room_num, guest_name)" + "VALUES(?, ?)";
 					
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, roomNum);
