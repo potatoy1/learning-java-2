@@ -60,11 +60,3 @@ public class JDBCUtil2 {
 		if(conn != null) try {conn.close();}catch(SQLException ex) {}
 		}
 	}
-//
-//사용자가 뷰를 통해 요청함
-//
-//사용자가 요청한 원하는 기능을 서비스한테 처리해주는 컨트롤러
-//
-//처리 후 다시 뷰를 통해 사용자에게 보여짐
-//
-//모델->데이터 관련된 것

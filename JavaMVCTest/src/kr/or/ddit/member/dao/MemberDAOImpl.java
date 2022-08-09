@@ -38,7 +38,7 @@ public class MemberDAOImpl implements IMemberDAO {
 			
 		}catch(SQLException ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("회원등록 과정중 예외발생!", ex);
+			throw new RuntimeException("회원등록 과정중 예외발생!", ex);	//실행시점예외 던지기(호출하는 메서드에서 의무적으로 try/catch로 감싸지 않아도됨)
 		}finally {
 			// 자원반납
 			JDBCUtil3.close(conn, stmt, pstmt, rs);
@@ -144,8 +144,8 @@ public class MemberDAOImpl implements IMemberDAO {
 				MemberVO mv = new MemberVO();
 				mv.setMemId(rs.getString("mem_id"));
 				mv.setMemName(rs.getString("mem_name"));
-				mv.setMemTel(rs.getString("mem_id"));
-				mv.setMemAddr(rs.getString("mem_tel"));
+				mv.setMemTel(rs.getString("mem_tel"));
+				mv.setMemAddr(rs.getString("mem_addr"));
 				
 				memList.add(mv);
 			}
@@ -153,6 +153,65 @@ public class MemberDAOImpl implements IMemberDAO {
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 			throw new RuntimeException("전체 회원조회 중 예외발생!", ex);
+		}finally {
+			JDBCUtil3.close(conn, stmt, pstmt, rs);
+		}
+		return memList;
+	}
+
+	@Override
+	public List<MemberVO> searchMemberList(MemberVO mv) {
+		
+		List<MemberVO> memList = new ArrayList<MemberVO>();
+		try {
+			conn = JDBCUtil3.getConnection();
+			
+			String sql = "select * from mymember where 1=1 ";	// 동적쿼리(사용자가 조회하는것에 따라 쿼리문이 달라짐)
+			
+			if(mv.getMemId() !=null && !mv.getMemId().equals("")) {
+				sql += " and mem_id = ? ";
+			}
+			if(mv.getMemName() !=null && !mv.getMemName().equals("")) {
+				sql += " and mem_name = ? ";
+			}
+			if(mv.getMemTel() !=null && !mv.getMemTel().equals("")) {
+				sql += " and mem_tel = ? ";
+			}
+			if(mv.getMemAddr() !=null && !mv.getMemAddr().equals("")) {
+				sql += " and mem_addr like '%' || ?  || '%' ";
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int index = 1;
+			
+			if(mv.getMemId() !=null && !mv.getMemId().equals("")) {
+				pstmt.setString(index++, mv.getMemId());
+			}
+			if(mv.getMemName() !=null && !mv.getMemName().equals("")) {
+				pstmt.setString(index++, mv.getMemName());
+			}
+			if(mv.getMemTel() !=null && !mv.getMemTel().equals("")) {
+				pstmt.setString(index++, mv.getMemTel());
+			}
+			if(mv.getMemAddr() !=null && !mv.getMemAddr().equals("")) {
+				pstmt.setString(index++, mv.getMemAddr());
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberVO mv2 = new MemberVO();
+				mv2.setMemId(rs.getString("mem_id"));
+				mv2.setMemName(rs.getString("mem_name"));
+				mv2.setMemTel(rs.getString("mem_tel"));
+				mv2.setMemAddr(rs.getString("mem_addr"));
+				
+				memList.add(mv2);
+			}
+			
+		}catch(SQLException ex) {
+			ex.printStackTrace();
 		}finally {
 			JDBCUtil3.close(conn, stmt, pstmt, rs);
 		}
