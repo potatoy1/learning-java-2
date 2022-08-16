@@ -1,11 +1,12 @@
 package kr.or.ddit.basic;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+
+import org.apache.log4j.Logger;
 
 import kr.or.ddit.util.JDBCUtil3;
 
@@ -46,6 +47,12 @@ public class T01MemberInfoTest {
 	private ResultSet rs;
 	
 	private Scanner scan = new Scanner(System.in); 
+	
+	private static final Logger SQL_LOGGER = Logger.getLogger("log4jexam.sql.Query");
+
+	private static final Logger PARAM_LOGGER = Logger.getLogger("log4jexam.sql.Parameter");
+	
+	private static final Logger RESULT_LOGGER = Logger.getLogger(T01MemberInfoTest.class);
 	
 	/**
 	 * 메뉴를 출력하는 메서드
@@ -233,7 +240,7 @@ public class T01MemberInfoTest {
 		do {
 			System.out.println();
 			System.out.println("추가할 회원 정보를 입력하세요");
-			System.out.println("회원 ID>> ");
+			System.out.print("회원 ID>> ");
 			
 			memId = scan.next();
 			
@@ -245,21 +252,23 @@ public class T01MemberInfoTest {
 			}
 		}while(chk == true);
 		
-		System.out.println("회원이름>> " );
+		System.out.print("회원이름>> " );
 		String memName = scan.next();
 		
-		System.out.println("회원 전화번호>> ");
+		System.out.print("회원 전화번호>> ");
 		String memTel = scan.next();
 		
 		scan.nextLine(); // 입력버퍼 비우기
 		
-		System.out.println("회원 주소>> ");
+		System.out.print("회원 주소>> ");
 		String memAddr = scan.nextLine();
 		
 		try {
 			conn = JDBCUtil3.getConnection();
 			
 			String sql = "INSERT INTO mymember ( mem_id, mem_name, mem_tel, mem_addr, reg_dt)" + "VALUES(?, ?, ?, ?, sysdate)";
+			
+			SQL_LOGGER.debug("쿼리: " + sql);
 					
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memId);
@@ -267,7 +276,11 @@ public class T01MemberInfoTest {
 			pstmt.setString(3, memTel);
 			pstmt.setString(4, memAddr);
 			
+			PARAM_LOGGER.debug("mem_id : " + memId + ", memName: " + memName + ", memTel: " + memTel + ", memAddr: " + memAddr);
+			
 			int cnt = pstmt.executeUpdate();
+
+			RESULT_LOGGER.info("실행결과: " + cnt);
 			
 			if(cnt > 0) {
 				System.out.println(memId + "회원 추가 작업 성공!");
