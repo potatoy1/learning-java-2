@@ -27,7 +27,7 @@ public class TcpFileSender {
 			server = new ServerSocket(7777);
 			System.out.println("서버 준비 완료...");
 			
-			String downDir = "D:/D_Other/";
+			String downDir = "D:\\D_Other";
 			
 			File file = null;
 			
