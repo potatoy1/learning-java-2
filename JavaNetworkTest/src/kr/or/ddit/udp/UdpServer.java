@@ -10,8 +10,8 @@ import java.util.Date;
 
 public class UdpServer {
 	private DatagramSocket ds;
-	private DatagramPacket dp;
-	private byte[] msg; //패킷 수신을 위한 바이트 배열 선언(배열에 담아 소켓으로 전송)
+	private DatagramPacket dp; // 패킷에 담고 싶은것 담음.
+	private byte[] msg; // 패킷 수신을 위한 바이트 배열 선언(배열에 담아 소켓으로 전송)
 	
 	public UdpServer() {
 		try {
