@@ -17,7 +17,7 @@ public class T02ServletTest extends HttpServlet{
  	   (로딩이 안된 경우에는 로딩을 수행한다. 로딩시 init()메서드 호출됨.)
  	3. 서블릿 컨테이너는 요청을 처리할 개별 스레드 객체를 생성하여 해당 서블릿 객체의 service()메서드를 호출한다.
  	   (이때 HttpServletRequest 및 HttpServletResponse 객체를 생성하여 파라미터로 넘겨준다.)
- 	4. service()메서드는 메서드 타입을 체크하여 적잘한 메서드를 호출한다.( doGet, doPost, doPut, doDelete 등) 
+ 	4. service()메서드는 메서드 타입을 체크하여 적절한 메서드를 호출한다.( doGet, doPost, doPut, doDelete 등) 
 	5. 요청 처리가 완료되면 HttpServletRequest 및 HttpServletResponse객체는 소멸 된다.
 	6. 컨테이너로부터 서블릿이 제거되는 경우에 destroy()메서드가 호출된다.
  */
