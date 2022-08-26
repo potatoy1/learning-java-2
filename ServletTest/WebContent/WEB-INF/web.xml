@@ -97,6 +97,15 @@
 		<url-pattern>/T11ServletContextListenerTest</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>T12ImageServlet</servlet-name>
+		<servlet-class>kr.or.ddit.basic.T12ImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>T12ImageServlet</servlet-name>
+		<url-pattern>/T12ImageServlet</url-pattern>
+	</servlet-mapping>
+	
 	
 	<filter>
 		<filter-name>T08ServletFilter</filter-name>
