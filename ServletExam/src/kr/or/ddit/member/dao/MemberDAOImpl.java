@@ -67,4 +67,11 @@ public class MemberDAOImpl implements IMemberDAO{
 		return memList;
 	}
 
+	@Override
+	public MemberVO getMember(String memId) {
+		MemberVO memVO = sqlSession.selectOne("member.getMember", memId);
+		
+		return memVO;
+	}
+
 }

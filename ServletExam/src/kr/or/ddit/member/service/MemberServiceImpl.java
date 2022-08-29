@@ -4,7 +4,6 @@ import java.util.List;
 
 import kr.or.ddit.member.dao.IMemberDAO;
 import kr.or.ddit.member.dao.MemberDAOImpl;
-import kr.or.ddit.member.dao.MemberDAOImplForJDBC;
 import kr.or.ddit.member.vo.MemberVO;
 
 public class MemberServiceImpl implements IMemberService {
@@ -62,19 +61,11 @@ public class MemberServiceImpl implements IMemberService {
 		List<MemberVO> memList = memDao.searchMemberList(mv);
 		return memList;
 	}
-	
-	/*
-	public void accoutTransfer() {
-		try{
-		// 트랜잭션 시작
-		// 계좌DAO.update(); 관우 계정 백만원 인출
-		// 계좌DAO.update(); 재경 계정 백만원 입금
-		// 트랜잭션 종료(commit)	
-		}catch(Exception ex){
-			// 롤백처리
-		}
-		 --> 예외 발생시 try/catch로 감싸서 rollback하면 됨.
-		 --> 서비스클래스 사용하면 트랜잭션 관리가 쉬워진다.
+
+	@Override
+	public MemberVO getMember(String memId) {
+		MemberVO mv = memDao.getMember(memId);
+		return mv;
 	}
-	*/
+
 }

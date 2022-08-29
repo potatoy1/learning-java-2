@@ -28,6 +28,13 @@ public interface IMemberDAO {
 	public boolean checkMember(String memId);
 	
 	/**
+	 * 주어진 회원ID에 해당하는 회원정보 가져오기
+	 * @param memId 회원아이디
+	 * @return 회원정보를 담은 MemberVO객체
+	 */
+	public MemberVO getMember(String memId);
+	
+	/**
 	 * 하나의 MemberVO자료를 이용하여 DB를 update하는 메서드
 	 * @param mv 수정할 회원정보가 들어있는 MemberVO객체
 	 * @return 작업성공 : 1, 작업실패: 0

@@ -13,21 +13,42 @@ import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
 
-@WebServlet("/member/insert.do")
-public class InsertMemberController extends HttpServlet {
-	
-	@Override
+/**
+ * Servlet implementation class UpdateMemberController
+ */
+@WebServlet("/member/update.do")
+public class UpdateMemberController extends HttpServlet {
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateMemberController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String memId = req.getParameter("memId");
 		
-		req.getRequestDispatcher("/view/member/insertForm.jsp").forward(req, resp);
+		// 1. 서비스 객체 생성하기
+		IMemberService memService = MemberServiceImpl.getInstance();
+		MemberVO mv =  memService.getMember(memId);
+		
+		req.setAttribute("mv", mv);
+		
+		req.getRequestDispatcher("/view/member/updateForm.jsp").forward(req, resp);
 	}
-	
-	@Override
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//		req.setCharacterEncoding("UTF-8");
-		
-		// 1. 파라미터 데이터 가져오기
+		// 1. 요청파라미터 정보 가져오기
 		String memId = req.getParameter("memId");
 		String memName = req.getParameter("memName");
 		String memTel = req.getParameter("memTel");
@@ -36,31 +57,32 @@ public class InsertMemberController extends HttpServlet {
 		// 2. 서비스 객체 생성하기
 		IMemberService memService = MemberServiceImpl.getInstance();
 		
-		// 3. 회원정보 등록하기
+		// 3. 회원정보 수정하기
 		MemberVO mv = new MemberVO();
 		mv.setMemId(memId);
 		mv.setMemName(memName);
 		mv.setMemTel(memTel);
 		mv.setMemAddr(memAddr);
-		int cnt = memService.registerMember(mv);
-
+		
+		int cnt = memService.modifyMember(mv);
+		
 		String msg = "";
+		
 		if(cnt > 0) {
-			// 성공
 			msg = "성공";
 		}else {
-			// 실패
 			msg = "실패";
 		}
+		
+		//req.setAttribute("msg", msg);
 		
 		HttpSession session = req.getSession();
 		session.setAttribute("msg", msg);
 		
 		// 4. 목록 조회 화면으로 이동
-//		req.getRequestDispatcher("/member/list.do").forward(req, resp);
-		
 		String redirectUrl = req.getContextPath() + "/member/list.do";
 		
 		resp.sendRedirect(redirectUrl);
 	}
+
 }
