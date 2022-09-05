@@ -4,7 +4,7 @@
 	
 	<insert id="insertAtchFile">
 	
-		<selectKey keyProperty="atchFileId" resultType="Long">
+		<selectKey order="BEFORE" keyProperty="atchFileId" resultType="Long">
 			select ATCH_FILE_SEQ.nextval from dual
 		</selectKey>
 		
@@ -43,10 +43,10 @@
 		)
 	</insert>
 	
-	<resultMap type="atchVO" id="atchfileDetailMap">
-	<result property="atchFileId "    	column=" ATCH_FILE_ID"/>
+	<resultMap type="atchVO" id="atchFileDetailMap">
+	<result property="atchFileId"    	column="ATCH_FILE_ID"/>
 	<result property="fileSn"      	 	column="FILE_SN"/>
-	<result property="fileStreCours "   column="FILE_STRE_COURS"/>
+	<result property="fileStreCours"   column="FILE_STRE_COURS"/>
 	<result property="streFileNm"       column="STRE_FILE_NM"/>
 	<result property="orignlFileNm"     column="ORIGNL_FILE_NM"/>
 	<result property="fileExtsn"        column="FILE_EXTSN"/>
@@ -54,12 +54,12 @@
 	<result property="fileSize"      	column="FILE_SIZE"/>
 	</resultMap>
 	
-	<select id="getAtachFileList" parameterType="atchVO" resultMap="atchFileDetailMap">
+	<select id="getAtchFileList" parameterType="atchVO" resultMap="atchFileDetailMap">
 		select * from atch_file_detail
 		where atch_file_id = #{atchFileId}
 	</select>
 	
-	<select id="getAtachFileDetail" resultType="atchVO">
+	<select id="getAtchFileDetail" resultType="atchVO">
 		select * from atch_file_detail
 		where atch_file_id = #{atchFileId}
 		and file_sn = #{fileSn}

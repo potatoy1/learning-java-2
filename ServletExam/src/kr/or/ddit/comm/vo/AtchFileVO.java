@@ -11,7 +11,7 @@ public class AtchFileVO {
 	private String streFileNm;	  // 저장파일명
 	private String orignlFileNm;  // 원본파일명
 	private String fileExtsn;	  // 파일확장자
-	private String fileCn;		  // 파일내용
+	private String fileCn = "";	  // 파일내용
 	private long fileSize = 0;	  // 파일크기
 	
 	public long getAtchFileId() {
